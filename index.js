@@ -100,7 +100,10 @@ function calculator(string) {
         return "Ошибка, одно из значений не целое"
       } else if (check() == -3){
           return "Ошибка, нельзя вычесть два разных вида числа"
-      } else {
+      } else if(first - second <= 0 && firstIsArabic == false && secondIsArabic == false) {
+        return " empty~ ";
+      }
+      else {
         return first - second;
         break;
       }
@@ -137,5 +140,5 @@ function calculator(string) {
 }
 
 
-let test = calculator("2*4");
+let test = calculator("I-VI");
 console.log(test);
