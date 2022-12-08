@@ -104,7 +104,7 @@ function calculator(string) {
       } else if (check() == -2) {
         return "Ошибка, одно из значений не целое"
       } else {
-        return Math.round(first / second);
+        return Math.trunc(first / second);
         break;
       }
     }
@@ -114,5 +114,5 @@ function calculator(string) {
 }
 
 
-let test = calculator("8/3");
+let test = calculator("2/4");
 console.log(test);
