@@ -83,11 +83,11 @@ function calculator(string) {
     if (string[i] == "+") {
       nums();
       if (check() == -1) {
-          return "Ошибка, одно из значений больше 10";
+          throw {message: "Ошибка, одно из значений больше 10"};
       } else if (check() == -2) {
-          return "Ошибка, одно из значений не целое"
+          throw {message: "Ошибка, одно из значений не целое"};
       } else if (check() == -3){
-          return "Ошибка, складываются два разных вида числа"
+          throw {message: "Ошибка, складываются два разных вида числа"};
       } else {
         return first + second;
         break;
@@ -95,11 +95,11 @@ function calculator(string) {
     } else if (string[i] == "-") {
       nums();
       if (check() == -1) {
-        return "Ошибка, одно из значений больше 10";
+          throw {message: "Ошибка, одно из значений больше 10"};
       } else if (check() == -2) {
-        return "Ошибка, одно из значений не целое"
+          throw {message: "Ошибка, одно из значений не целое"};
       } else if (check() == -3){
-          return "Ошибка, нельзя вычесть два разных вида числа"
+          throw {message: "Ошибка, в вычитании используется два разных вида числа"};
       } else if(first - second <= 0 && firstIsArabic == false && secondIsArabic == false) {
         return " empty~ ";
       }
@@ -110,24 +110,23 @@ function calculator(string) {
     } else if (string[i] == "*") {
       nums();
       if (check() == -1) {
-        return "Ошибка, одно из значений больше 10";
+          throw {message: "Ошибка, одно из значений больше 10"};
       } else if (check() == -2) {
-        return "Ошибка, одно из значений не целое"
-      } 
-      else if (check() == -3){
-          return "Ошибка, умножаются два разных вида числа"
+          throw {message: "Ошибка, одно из значений не целое"};
+      } else if (check() == -3){
+          throw {message: "Ошибка, умножается два разных вида числа"};
       } else {
         return first * second;
         break;
       }
     } else if (string[i] == "/") {
       nums();
-        if (check() == -1) {
-        return "Ошибка, одно из значений больше 10";
+      if (check() == -1) {
+          throw {message: "Ошибка, одно из значений больше 10"};
       } else if (check() == -2) {
-        return "Ошибка, одно из значений не целое"
+          throw {message: "Ошибка, одно из значений не целое"};
       } else if (check() == -3){
-          return "Ошибка, нельзя поделить два разных вида числа"
+          throw {message: "Ошибка, невозможно делить два разных вида числа"};
       }
         else {
         return Math.trunc(first / second);
@@ -140,5 +139,5 @@ function calculator(string) {
 }
 
 
-let test = calculator("I-VI");
+let test = calculator("98-8");
 console.log(test);
