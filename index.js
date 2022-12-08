@@ -1,13 +1,15 @@
 function calculator(string) {
   let first = 0; //первое число в формате числа
   let second = 0; //второе число в формате числа
+  let firstIsArabic = false;
+  let secondIsArabic = false;
   let i = 0; //индекс элемента массива/ порядок символа в строке
 
   function romanToArabic(roman) {
     if (roman == null)
       return -1;
     if (Number(roman)) {
-      return roman;
+      return -2;
     }
 
     var totalValue = 0,
@@ -45,17 +47,25 @@ function calculator(string) {
 
   function nums() {
     first = string.slice(0, i);
+      if(romanToArabic(first) == -2){
+        firstIsArabic = true;
+        first = Number(first);
+      } else
     first = Number(romanToArabic(first));
 
     second = string.slice(i + 1, string.length);
+      if(romanToArabic(second) == -2){
+        secondIsArabic = true;
+        second = Number(second);
+      } else 
     second = Number(romanToArabic(second));
   }
 
   function check() {
-    if (first <= 0 || first >= 10) {
+    if (first <= -10 || first >= 10) {
       return -1;
     }
-    if (second <= 0 || second >= 10) {
+    if (second <= -10 || second >= 10) {
       return -1;
     }
     if (!Number.isInteger(first)) {
@@ -64,15 +74,20 @@ function calculator(string) {
     if (!Number.isInteger(second)) {
       return -2;
     }
+    if (firstIsArabic != secondIsArabic){
+      return -3;
+    }
   }
 
   for (i = 0; i < string.length; i++) {
     if (string[i] == "+") {
       nums();
       if (check() == -1) {
-        return "Ошибка, одно из значений больше 10";
+          return "Ошибка, одно из значений больше 10";
       } else if (check() == -2) {
-        return "Ошибка, одно из значений не целое"
+          return "Ошибка, одно из значений не целое"
+      } else if (check() == -3){
+          return "Ошибка, складываются два разных вида числа"
       } else {
         return first + second;
         break;
@@ -83,6 +98,8 @@ function calculator(string) {
         return "Ошибка, одно из значений больше 10";
       } else if (check() == -2) {
         return "Ошибка, одно из значений не целое"
+      } else if (check() == -3){
+          return "Ошибка, нельзя вычесть два разных вида числа"
       } else {
         return first - second;
         break;
@@ -93,6 +110,9 @@ function calculator(string) {
         return "Ошибка, одно из значений больше 10";
       } else if (check() == -2) {
         return "Ошибка, одно из значений не целое"
+      } 
+      else if (check() == -3){
+          return "Ошибка, умножаются два разных вида числа"
       } else {
         return first * second;
         break;
@@ -103,7 +123,10 @@ function calculator(string) {
         return "Ошибка, одно из значений больше 10";
       } else if (check() == -2) {
         return "Ошибка, одно из значений не целое"
-      } else {
+      } else if (check() == -3){
+          return "Ошибка, нельзя поделить два разных вида числа"
+      }
+        else {
         return Math.trunc(first / second);
         break;
       }
@@ -114,5 +137,5 @@ function calculator(string) {
 }
 
 
-let test = calculator("2/4");
+let test = calculator("2*4");
 console.log(test);
