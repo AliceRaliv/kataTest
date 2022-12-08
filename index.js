@@ -59,6 +59,9 @@ function calculator(string) {
         second = Number(second);
       } else 
     second = Number(romanToArabic(second));
+    if(/\D/.test(second)){
+      throw {message: "формат математической операции не удовлетворяет заданию"}
+    }
   }
 
   function check() {
@@ -76,68 +79,68 @@ function calculator(string) {
     }
     if (firstIsArabic != secondIsArabic){
       return -3;
-    }
+    }      
   }
 
-  for (i = 0; i < string.length; i++) {
-    if (string[i] == "+") {
-      nums();
-      if (check() == -1) {
-          throw {message: "Ошибка, одно из значений больше 10"};
-      } else if (check() == -2) {
-          throw {message: "Ошибка, одно из значений не целое"};
-      } else if (check() == -3){
-          throw {message: "Ошибка, складываются два разных вида числа"};
-      } else {
-        return first + second;
-        break;
-      }
-    } else if (string[i] == "-") {
-      nums();
-      if (check() == -1) {
-          throw {message: "Ошибка, одно из значений больше 10"};
-      } else if (check() == -2) {
-          throw {message: "Ошибка, одно из значений не целое"};
-      } else if (check() == -3){
-          throw {message: "Ошибка, в вычитании используется два разных вида числа"};
-      } else if(first - second <= 0 && firstIsArabic == false && secondIsArabic == false) {
-        return " empty~ ";
-      }
-      else {
-        return first - second;
-        break;
-      }
-    } else if (string[i] == "*") {
-      nums();
-      if (check() == -1) {
-          throw {message: "Ошибка, одно из значений больше 10"};
-      } else if (check() == -2) {
-          throw {message: "Ошибка, одно из значений не целое"};
-      } else if (check() == -3){
-          throw {message: "Ошибка, умножается два разных вида числа"};
-      } else {
-        return first * second;
-        break;
-      }
-    } else if (string[i] == "/") {
-      nums();
-      if (check() == -1) {
-          throw {message: "Ошибка, одно из значений больше 10"};
-      } else if (check() == -2) {
-          throw {message: "Ошибка, одно из значений не целое"};
-      } else if (check() == -3){
-          throw {message: "Ошибка, невозможно делить два разных вида числа"};
-      }
+    for (i = 0; i < string.length; i++) {
+      if (string[i] == "+") {
+        nums();
+        if (check() == -1) {
+            throw {message: "Ошибка, одно из значений больше 10"};
+        } else if (check() == -2) {
+            throw {message: "Ошибка, одно из значений не целое"};
+        } else if (check() == -3){
+            throw {message: "Ошибка, складываются два разных вида числа"};
+        } else {
+          return first + second;
+          break;
+        }
+      } else if (string[i] == "-") {
+        nums();
+        if (check() == -1) {
+            throw {message: "Ошибка, одно из значений больше 10"};
+        } else if (check() == -2) {
+            throw {message: "Ошибка, одно из значений не целое"};
+        } else if (check() == -3){
+            throw {message: "Ошибка, в вычитании используется два разных вида числа"};
+        } else if(first - second <= 0 && firstIsArabic == false && secondIsArabic == false) {
+          return " empty~ ";
+        }
         else {
-        return Math.trunc(first / second);
-        break;
+          return first - second;
+          break;
+        }
+      } else if (string[i] == "*") {
+        nums();
+        if (check() == -1) {
+            throw {message: "Ошибка, одно из значений больше 10"};
+        } else if (check() == -2) {
+            throw {message: "Ошибка, одно из значений не целое"};
+        } else if (check() == -3){
+            throw {message: "Ошибка, умножается два разных вида числа"};
+        } else {
+          return first * second;
+          break;
+        }
+      } else if (string[i] == "/") {
+        nums();
+        if (check() == -1) {
+            throw {message: "Ошибка, одно из значений больше 10"};
+        } else if (check() == -2) {
+            throw {message: "Ошибка, одно из значений не целое"};
+        } else if (check() == -3){
+            throw {message: "Ошибка, невозможно делить два разных вида числа"};
+        }
+          else {
+          return Math.trunc(first / second);
+          break;
+        }
       }
+  
     }
-
-  }
 
 }
 
 
-let test = calculator("98-8");
+let test = calculator("75-4");
 console.log(test);
