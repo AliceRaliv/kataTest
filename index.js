@@ -1,5 +1,5 @@
 function calculator(string) {
-  let first = 0; //первое число в формате числа
+let first = 0; //первое число в формате числа
   let second = 0; //второе число в формате числа
   let firstIsArabic = false;
   let secondIsArabic = false;
@@ -45,6 +45,21 @@ function calculator(string) {
     }
   }
 
+
+   function arabicToRoman(arabic) {
+
+  let r = [["I","V"],["X","L"],["C","D"],["M",""]];
+  let f = [[],[[0,1,0]],[[0,2,0]],[[0,3,0]],[[0,1,1],[0,1,0]],[[0,1,1]],
+          [[0,1,0],[0,1,1]],[[0,2,0],[0,1,1]],[[0,3,0],[0,1,1]],[[1,1,0],[0,1,0]]];
+  let num = arabic; let rim = "";
+
+  String(num).split("").reverse().forEach((element, i) =>  
+    	f[element].forEach((d) => 
+  	     	rim = rim.concat (r[i+d[0]][d[2]].repeat(d[1]))));
+      
+  return rim.split("").reverse().join("");
+}
+
   function nums() {
     first = string.slice(0, i);
       if(romanToArabic(first) == -2){
@@ -65,10 +80,10 @@ function calculator(string) {
   }
 
   function check() {
-    if (first <= -10 || first >= 10) {
+    if (first < 0 || first > 10) {
       return -1;
     }
-    if (second <= -10 || second >= 10) {
+    if (second < 0 || second > 10) {
       return -1;
     }
     if (!Number.isInteger(first)) {
@@ -92,7 +107,7 @@ function calculator(string) {
         } else if (check() == -3){
             throw {message: "Ошибка, складываются два разных вида числа"};
         } else {
-          return first + second;
+          return String(first + second);
           break;
         }
       } else if (string[i] == "-") {
@@ -107,7 +122,7 @@ function calculator(string) {
           return " empty~ ";
         }
         else {
-          return first - second;
+          return String(first - second);
           break;
         }
       } else if (string[i] == "*") {
@@ -119,7 +134,7 @@ function calculator(string) {
         } else if (check() == -3){
             throw {message: "Ошибка, умножается два разных вида числа"};
         } else {
-          return first * second;
+          return String(first * second);
           break;
         }
       } else if (string[i] == "/") {
@@ -132,15 +147,15 @@ function calculator(string) {
             throw {message: "Ошибка, невозможно делить два разных вида числа"};
         }
           else {
-          return Math.trunc(first / second);
+          return arabicToRoman(Math.trunc(first / second));
           break;
         }
       }
   
     }
 
+  
 }
 
-
-let test = calculator("75-4");
+let test = calculator("X/I");
 console.log(test);
