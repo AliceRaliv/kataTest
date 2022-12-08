@@ -41,7 +41,7 @@ function calculator(string) {
       case 'C': return 100;
       case 'D': return 500;
       case 'M': return 1000;
-      default: return -1;
+      default: return 0;
     }
   }
 
@@ -110,8 +110,8 @@ function calculator(string) {
       } else if (check() == -3) {
         throw { message: "Ошибка, складываются два разных вида числа" };
       } else if (check() == -4){
-        return arabicToRoman(Math.trunc(first + second));}
-      else { return Math.trunc(first + second);
+        return String(arabicToRoman(Math.trunc(first + second)));}
+      else { return String(Math.trunc(first + second));
       break;
       }
     } else if (string[i] == "-") {
@@ -125,8 +125,8 @@ function calculator(string) {
       } else if (first - second <= 0 && firstIsArabic == false && secondIsArabic == false) {
         return " empty~ ";
       } else if (check() == -4){
-        return arabicToRoman(Math.trunc(first - second));}
-      else { return Math.trunc(first - second);
+        return String(arabicToRoman(Math.trunc(first - second)));}
+      else { return String(Math.trunc(first - second));
       break;
       }
     } else if (string[i] == "*") {
@@ -138,8 +138,8 @@ function calculator(string) {
       } else if (check() == -3) {
         throw { message: "Ошибка, умножается два разных вида числа" };
        } else if (check() == -4){
-            return arabicToRoman(Math.trunc(first * second));}
-          else { return Math.trunc(first * second);
+            return String(arabicToRoman(Math.trunc(first * second)));}
+          else { return String(Math.trunc(first * second));
       break;
       }
     } else if (string[i] == "/") {
@@ -151,8 +151,8 @@ function calculator(string) {
       } else if (check() == -3) {
         throw { message: "Ошибка, невозможно делить два разных вида числа" };
       } else if (check() == -4){
-        return arabicToRoman(Math.trunc(first / second));}
-      else { return Math.trunc(first / second);
+        return String(arabicToRoman(Math.trunc(first / second)));}
+      else { return String(Math.trunc(first/second));;
       break;
             
     }
@@ -161,5 +161,7 @@ function calculator(string) {
 }
 }
 
-let test = calculator("VI+III");
+let test = calculator("X / I");
 console.log(test);
+
+//String(arabicToRoman(Math.trunc(first / second)));
